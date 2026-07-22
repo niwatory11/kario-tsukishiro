@@ -1,0 +1,139 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  background: linear-gradient(180deg, #10161f 0%, #16222e 55%, var(--c-tetsukon) 100%);
+  color: var(--color-text-on-night);
+  overflow: hidden;
+  display: flex;
+}
+
+.hero :focus-visible {
+  outline-color: var(--color-focus-on-night);
+}
+
+.moonWrap {
+  position: absolute;
+  top: clamp(4rem, 10vh, 7rem);
+  left: clamp(-2rem, 2vw, 6rem);
+  width: clamp(180px, 30vw, 320px);
+  animation: moonrise 1.8s var(--ease-out) both;
+}
+
+@keyframes moonrise {
+  from {
+    opacity: 0;
+    translate: 0 32px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.moon {
+  width: 100%;
+  height: auto;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--header-h) + var(--space-8));
+  padding-bottom: clamp(6rem, 14vh, 9rem);
+}
+
+.heading {
+  align-self: flex-end;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: var(--fs-display);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.9;
+  margin-right: clamp(0rem, 3vw, 4rem);
+  animation: fadeUp 1.2s var(--ease-out) 0.35s both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.lead {
+  margin-top: auto;
+  max-width: 34em;
+  animation: fadeUp 1.2s var(--ease-out) 0.7s both;
+}
+
+.subcopy {
+  font-size: clamp(0.9375rem, 0.85rem + 0.5vw, 1.125rem);
+  letter-spacing: 0.08em;
+  color: var(--color-text-on-night);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.note {
+  margin-top: var(--space-4);
+  font-size: var(--fs-caption);
+  color: var(--color-text-on-night-muted);
+}
+
+.waveBand {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: clamp(3.5rem, 8vh, 5.5rem);
+  color: #46586b;
+  overflow: hidden;
+}
+
+.wave {
+  width: calc(100% + 56px);
+  height: 100%;
+  animation: drift 9s linear infinite;
+}
+
+@keyframes drift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: -56px 0;
+  }
+}
+
+.sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 70%;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .heading {
+    line-height: 1.75;
+  }
+
+  .moonWrap {
+    left: clamp(-3rem, -6vw, 0rem);
+  }
+}

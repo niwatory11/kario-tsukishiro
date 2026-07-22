@@ -1,0 +1,43 @@
+.wrap {
+  margin-bottom: var(--space-12);
+}
+
+.kana {
+  font-size: var(--fs-small);
+  letter-spacing: 0.35em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3.5rem;
+  height: 1px;
+  background: var(--c-ginnezu);
+}
+
+.center {
+  text-align: center;
+}
+
+.center .title::after {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.night .kana {
+  color: var(--c-byakuroku);
+}
+
+.night .title {
+  color: var(--color-text-on-night);
+}

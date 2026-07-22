@@ -1,0 +1,36 @@
+.band {
+  background: var(--c-tetsukon);
+  color: var(--color-text-on-night);
+  padding-block: var(--space-12);
+}
+
+.band :focus-visible {
+  outline-color: var(--color-focus-on-night);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.copy {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  letter-spacing: 0.1em;
+}
+
+.copyBreak {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+}

@@ -1,0 +1,83 @@
+/*
+ * 菓寮 月白 — デザイントークン(単一情報源)
+ *
+ * 配色は日本の伝統色名から採る。
+ * 「月白(げっぱく)」= 月が昇る直前、空が白んで見える色。
+ * ページはヒーロー(鉄紺の夜空)から下るにつれて月白へ白んでいく。
+ *
+ * ブレークポイント(メディアクエリ内では変数が使えないため生値で統一):
+ *   sm: 480px / md: 768px / lg: 1024px / xl: 1280px
+ */
+:root {
+  /* ---- 原色パレット(伝統色) ---- */
+  --c-geppaku: #f3f8fa; /* 月白: 基調の地色 */
+  --c-usuai: #e4edf2; /* 淡藍: 交互セクションの地 */
+  --c-tetsukon: #1c2a38; /* 鉄紺: 夜空・フッター */
+  --c-yoru-fukai: #141f2b; /* 鉄紺より深い夜 */
+  --c-aisumi: #2a3640; /* 藍墨: 本文 */
+  --c-azuki: #8e4a43; /* 小豆: CTA・アクセント */
+  --c-azuki-koi: #7a3d37; /* 小豆(濃): hover */
+  --c-azuki-usu: #f0c9c3; /* 小豆(薄): 夜色背景上のアクセント文字 */
+  --c-byakuroku: #cbdcd2; /* 白緑: 節気タグの地 */
+  --c-byakuroku-text: #2c443a; /* 白緑地の上の文字色 */
+  --c-ginnezu: #8c99a3; /* 銀鼠: 罫線・装飾 */
+
+  /* ---- セマンティック ---- */
+  --color-bg: var(--c-geppaku);
+  --color-bg-alt: var(--c-usuai);
+  --color-bg-night: var(--c-tetsukon);
+  --color-text: var(--c-aisumi);
+  --color-text-muted: #55636e; /* 月白地で 4.5:1 以上 */
+  --color-text-on-night: #edf3f6;
+  --color-text-on-night-muted: #aebecb;
+  --color-accent: var(--c-azuki);
+  --color-accent-strong: var(--c-azuki-koi);
+  --color-on-accent: #fcf9f7;
+  --color-line: #c3cfd7;
+  --color-line-on-night: #3a4a5c;
+  --color-error: #a53a28;
+  --color-error-bg: #fdf3f1;
+  --color-success-bg: #f2f7f3;
+  --color-field-bg: #ffffff;
+  --color-focus: #2f6690; /* 藍のフォーカスリング */
+  --color-focus-on-night: #9cc4e4;
+
+  /* ---- タイポグラフィ ---- */
+  --font-display: 'Shippori Mincho', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --font-body:
+    'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+
+  --fs-display: clamp(2.25rem, 1.1rem + 4.8vw, 4.5rem);
+  --fs-h2: clamp(1.625rem, 1.25rem + 1.6vw, 2.25rem);
+  --fs-h3: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-caption: 0.75rem;
+
+  --lh-body: 1.9; /* 日本語本文は広めに */
+  --lh-heading: 1.45;
+  --ls-heading: 0.08em;
+  --ls-body: 0.03em;
+
+  /* ---- 余白・寸法 ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --section-pad: clamp(4.5rem, 10vw, 8rem);
+  --container-max: 1120px;
+  --container-pad: clamp(1.25rem, 5vw, 3rem);
+  --radius: 2px; /* 原則これ以上丸めない */
+  --tap-min: 44px;
+  --header-h: 4rem;
+
+  /* ---- モーション ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-reveal: 0.7s;
+}

@@ -1,0 +1,88 @@
+.section {
+  background: var(--color-bg);
+}
+
+.night {
+  background: var(--c-tetsukon);
+  color: var(--color-text-on-night);
+  padding-block: var(--section-pad) var(--space-8);
+}
+
+.intro {
+  max-width: 36em;
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-night);
+}
+
+.intro + .intro {
+  margin-top: var(--space-6);
+}
+
+/* 夜空が白む: このサイトの主題をそのまま視覚化する遷移帯 */
+.dawn {
+  height: clamp(10rem, 24vh, 16rem);
+  background: linear-gradient(
+    180deg,
+    var(--c-tetsukon) 0%,
+    #46596c 34%,
+    #93a7b5 62%,
+    #cfdde6 82%,
+    var(--c-geppaku) 100%
+  );
+}
+
+.day {
+  padding-block: var(--space-8) var(--section-pad);
+}
+
+.values {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.value {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.valueTitle {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: var(--fs-h3);
+  letter-spacing: 0.28em;
+  min-height: 9em;
+}
+
+.valueBody {
+  max-width: 26em;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .values {
+    flex-direction: row;
+    gap: var(--space-8);
+    align-items: flex-start;
+  }
+
+  .value {
+    flex: 1;
+  }
+
+  /* 等高のカード然とした並びを避け、段差でリズムを作る */
+  .value:nth-child(2) {
+    margin-top: var(--space-12);
+  }
+
+  .value:nth-child(3) {
+    margin-top: var(--space-6);
+  }
+}

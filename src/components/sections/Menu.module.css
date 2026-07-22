@@ -1,0 +1,68 @@
+.section {
+  background: var(--color-bg-alt);
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  max-width: 40rem;
+}
+
+.groupTitle {
+  font-size: var(--fs-h3);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--space-6);
+}
+
+.list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.itemName {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+/* 品書きの点線リーダー */
+.dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--c-ginnezu);
+  min-width: var(--space-6);
+}
+
+.price {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: var(--space-6);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .groups {
+    flex-direction: row;
+    max-width: none;
+    gap: var(--space-16);
+  }
+
+  .group {
+    flex: 1;
+  }
+}

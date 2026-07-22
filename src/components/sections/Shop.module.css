@@ -1,0 +1,69 @@
+.section {
+  background: var(--color-bg-alt);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.infoList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoRow {
+  display: flex;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.infoLabel {
+  flex: 0 0 5.5em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.infoValue {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.note {
+  margin-top: var(--space-6);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  max-width: 32em;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+.mapNote {
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+
+  .info {
+    flex: 1;
+  }
+
+  .mapWrap {
+    flex: 0 0 44%;
+  }
+}

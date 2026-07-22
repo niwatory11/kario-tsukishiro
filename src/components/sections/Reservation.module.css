@@ -1,0 +1,79 @@
+/* 一日の終わりへ: 月白からわずかに藍へ暮れていく */
+.section {
+  background: linear-gradient(180deg, var(--c-geppaku) 0%, #d5e2ea 100%);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.lede {
+  max-width: 30em;
+  color: var(--color-text);
+}
+
+.flow {
+  list-style: none;
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.flowItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.flowNumeral {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--c-ginnezu);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  background: var(--color-bg);
+}
+
+.flowTitle {
+  font-size: var(--fs-body-lg);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.flowBody {
+  margin-top: var(--space-1);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.formWrap {
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: clamp(var(--space-6), 4vw, var(--space-8));
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+
+  .aside {
+    flex: 0 0 34%;
+  }
+
+  .formWrap {
+    flex: 1;
+  }
+}
