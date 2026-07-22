@@ -109,7 +109,7 @@ export function Craft() {
                 </span>
                 <span className={styles.icon}>{step.icon}</span>
                 <div>
-                  <h4 className={styles.stepTitle}>{step.title}</h4>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
                   <p className={styles.stepBody}>{step.body}</p>
                 </div>
               </Reveal>

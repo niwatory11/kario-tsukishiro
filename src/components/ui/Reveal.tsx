@@ -19,7 +19,7 @@ export function Reveal({
   const { ref, isVisible } = useReveal<HTMLElement>()
   return (
     <Tag
-      ref={ref as never}
+      ref={ref}
       className={className ? `reveal ${className}` : 'reveal'}
       data-visible={isVisible}
       style={delay > 0 ? { ['--reveal-delay' as string]: `${delay}s` } : undefined}

@@ -1,7 +1,12 @@
 .hero {
   position: relative;
   min-height: 100svh;
-  background: linear-gradient(180deg, #10161f 0%, #16222e 55%, var(--c-tetsukon) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--c-yozora) 0%,
+    var(--c-yozora-naka) 55%,
+    var(--c-tetsukon) 100%
+  );
   color: var(--color-text-on-night);
   overflow: hidden;
   display: flex;
@@ -14,7 +19,7 @@
 .moonWrap {
   position: absolute;
   top: clamp(4rem, 10vh, 7rem);
-  left: clamp(-2rem, 2vw, 6rem);
+  left: clamp(-3rem, -6vw, 0rem);
   width: clamp(180px, 30vw, 320px);
   animation: moonrise 1.8s var(--ease-out) both;
 }
@@ -53,7 +58,7 @@
   font-size: var(--fs-display);
   font-weight: 600;
   letter-spacing: 0.22em;
-  line-height: 1.9;
+  line-height: 1.75;
   margin-right: clamp(0rem, 3vw, 4rem);
   animation: fadeUp 1.2s var(--ease-out) 0.35s both;
 }
@@ -99,7 +104,7 @@
   position: absolute;
   inset: auto 0 0 0;
   height: clamp(3.5rem, 8vh, 5.5rem);
-  color: #46586b;
+  color: var(--color-hero-wave);
   overflow: hidden;
 }
 
@@ -128,12 +133,12 @@
   pointer-events: none;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .heading {
-    line-height: 1.75;
+    line-height: 1.9;
   }
 
   .moonWrap {
-    left: clamp(-3rem, -6vw, 0rem);
+    left: clamp(-2rem, 2vw, 6rem);
   }
 }

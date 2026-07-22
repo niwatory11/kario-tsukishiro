@@ -16,7 +16,7 @@
 }
 
 .solid {
-  background: rgb(243 248 250 / 0.92);
+  background: var(--color-header-surface);
   color: var(--color-text);
   border-bottom-color: var(--color-line);
   backdrop-filter: blur(6px);
@@ -95,7 +95,7 @@
 }
 
 .reserveButton {
-  display: inline-flex;
+  display: none;
   align-items: center;
   min-height: var(--tap-min);
   padding: var(--space-2) var(--space-6);
@@ -144,18 +144,18 @@
 }
 
 /* ロゴ+5項目+予約ボタンが1行に収まる幅からデスクトップナビへ切替 */
-@media (min-width: 900px) {
+@media (min-width: 480px) {
+  .reserveButton {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1024px) {
   .nav {
     display: block;
   }
 
   .menuButton {
-    display: none;
-  }
-}
-
-@media (max-width: 419px) {
-  .reserveButton {
     display: none;
   }
 }

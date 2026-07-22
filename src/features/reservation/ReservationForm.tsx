@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent } from 'react'
 import {
   emptyValues,
@@ -48,7 +48,7 @@ function errorId(field: ReservationField): string {
   return `rsv-${field}-error`
 }
 
-type Status = 'idle' | 'submitting' | 'done'
+type Status = 'idle' | 'done'
 
 /** 予約フォーム(フロントエンドバリデーションのみ。外部送信なし) */
 export function ReservationForm() {
@@ -56,13 +56,6 @@ export function ReservationForm() {
   const [errors, setErrors] = useState<ReservationErrors>({})
   const [showSummary, setShowSummary] = useState(false)
   const [status, setStatus] = useState<Status>('idle')
-  const timerRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    return () => {
-      if (timerRef.current !== null) window.clearTimeout(timerRef.current)
-    }
-  }, [])
 
   const applyError = (field: ReservationField, message: string | undefined) => {
     setErrors((prev) => {
@@ -91,7 +84,6 @@ export function ReservationForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (status === 'submitting') return
 
     const all = validateAll(values, new Date())
     setErrors(all)
@@ -104,19 +96,18 @@ export function ReservationForm() {
     }
 
     setShowSummary(false)
-    setStatus('submitting')
-    timerRef.current = window.setTimeout(() => setStatus('done'), 800)
+    setStatus('done')
   }
 
   if (status === 'done') {
     return (
       <div role="status" className={styles.doneBox}>
-        <p className={styles.doneTitle}>ご予約内容を受け付けました</p>
+        <p className={styles.doneTitle}>予約フォームのデモが完了しました</p>
         <p className={styles.doneBody}>
-          お名前とご希望日を確認のうえ、二日以内にお電話またはメールでご連絡いたします。
+          入力された内容は保存・送信されていません。実在する店舗への予約も成立していません。
         </p>
         <p className={styles.doneNote}>
-          ※ 本サイトはコンセプトサイトのため、実際の送信は行われません。
+          ご入力ありがとうございました。
         </p>
       </div>
     )
@@ -154,12 +145,14 @@ export function ReservationForm() {
       <div className={styles.grid}>
         <div className={styles.field}>
           <label htmlFor={fieldId('name')} className={styles.label}>
-            お名前 <span className={styles.required}>必須</span>
+            お名前<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('name')}
             type="text"
             autoComplete="name"
+            required
+            maxLength={40}
             className={styles.input}
             value={values.name}
             onChange={(e) => handleChange('name', e.target.value)}
@@ -176,11 +169,12 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('furigana')} className={styles.label}>
-            ふりがな <span className={styles.required}>必須</span>
+            ふりがな<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('furigana')}
             type="text"
+            required
             className={styles.input}
             value={values.furigana}
             onChange={(e) => handleChange('furigana', e.target.value)}
@@ -197,13 +191,14 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('phone')} className={styles.label}>
-            電話番号 <span className={styles.required}>必須</span>
+            電話番号<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('phone')}
             type="tel"
             autoComplete="tel"
             inputMode="tel"
+            required
             placeholder="090-0000-0000"
             className={styles.input}
             value={values.phone}
@@ -221,12 +216,13 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('email')} className={styles.label}>
-            メールアドレス <span className={styles.required}>必須</span>
+            メールアドレス<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('email')}
             type="email"
             autoComplete="email"
+            required
             className={styles.input}
             value={values.email}
             onChange={(e) => handleChange('email', e.target.value)}
@@ -243,11 +239,12 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('date')} className={styles.label}>
-            お受け取り希望日 <span className={styles.required}>必須</span>
+            お受け取り希望日<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('date')}
             type="date"
+            required
             min={minDateString(today)}
             max={maxDateString(today)}
             className={styles.input}
@@ -271,10 +268,11 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('time')} className={styles.label}>
-            お受け取り時間 <span className={styles.required}>必須</span>
+            お受け取り時間<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <select
             id={fieldId('time')}
+            required
             className={styles.input}
             value={values.time}
             onChange={(e) => handleChange('time', e.target.value)}
@@ -298,10 +296,11 @@ export function ReservationForm() {
 
         <fieldset
           className={styles.fieldset}
+          aria-invalid={Boolean(errors.order)}
           aria-describedby={errors.order ? errorId('order') : undefined}
         >
           <legend className={styles.label}>
-            ご注文内容 <span className={styles.required}>必須</span>
+            ご注文内容<span className={styles.required} aria-hidden="true">必須</span>
           </legend>
           <div className={styles.radioGroup}>
             {orderOptions.map((option, index) => (
@@ -310,6 +309,7 @@ export function ReservationForm() {
                   id={index === 0 ? fieldId('order') : `rsv-order-${index}`}
                   type="radio"
                   name="order"
+                  required
                   className={styles.radio}
                   value={option}
                   checked={values.order === option}
@@ -329,11 +329,12 @@ export function ReservationForm() {
 
         <div className={styles.field}>
           <label htmlFor={fieldId('quantity')} className={styles.label}>
-            個数 <span className={styles.required}>必須</span>
+            個数<span className={styles.required} aria-hidden="true">必須</span>
           </label>
           <input
             id={fieldId('quantity')}
             type="number"
+            required
             min={1}
             max={10}
             inputMode="numeric"
@@ -358,6 +359,7 @@ export function ReservationForm() {
           <textarea
             id={fieldId('notes')}
             rows={4}
+            maxLength={400}
             className={styles.input}
             value={values.notes}
             onChange={(e) => handleChange('notes', e.target.value)}
@@ -378,12 +380,8 @@ export function ReservationForm() {
         </div>
       </div>
 
-      <button
-        type="submit"
-        className={styles.submit}
-        disabled={status === 'submitting'}
-      >
-        {status === 'submitting' ? '送信しています…' : 'この内容で予約する'}
+      <button type="submit" className={styles.submit}>
+        入力内容を確認する
       </button>
       <p className={styles.formNote}>
         ※ 本サイトはコンセプトサイトです。フォームの内容が送信されることはありません。

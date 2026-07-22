@@ -26,6 +26,9 @@
 }
 
 .summaryLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
   color: var(--color-error);
   font-size: var(--fs-small);
 }
@@ -141,11 +144,6 @@ textarea.input {
 
 .submit:active:not(:disabled) {
   scale: 0.98;
-}
-
-.submit:disabled {
-  opacity: 0.6;
-  cursor: wait;
 }
 
 .formNote {

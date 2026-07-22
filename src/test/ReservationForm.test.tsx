@@ -19,7 +19,7 @@ describe('ReservationForm', () => {
     const user = userEvent.setup()
     render(<ReservationForm />)
 
-    await user.click(screen.getByRole('button', { name: 'この内容で予約する' }))
+    await user.click(screen.getByRole('button', { name: '入力内容を確認する' }))
 
     const summary = await screen.findByRole('alert')
     expect(summary).toHaveTextContent('入力内容に')
@@ -37,6 +37,19 @@ describe('ReservationForm', () => {
 
     expect(nameInput).toHaveAttribute('aria-invalid', 'true')
     expect(nameInput).toHaveAccessibleDescription('お名前を入力してください')
+  })
+
+  it('必須項目が HTML の required セマンティクスを持つ', () => {
+    render(<ReservationForm />)
+
+    expect(screen.getByRole('textbox', { name: 'お名前' })).toBeRequired()
+    expect(screen.getByRole('textbox', { name: 'ふりがな' })).toBeRequired()
+    expect(screen.getByRole('textbox', { name: '電話番号' })).toBeRequired()
+    expect(screen.getByRole('textbox', { name: 'メールアドレス' })).toBeRequired()
+    expect(screen.getByLabelText(/お受け取り希望日/)).toBeRequired()
+    expect(screen.getByRole('combobox', { name: 'お受け取り時間' })).toBeRequired()
+    expect(screen.getByRole('radio', { name: '季節の詰合せ 六個入' })).toBeRequired()
+    expect(screen.getByRole('spinbutton', { name: '個数' })).toBeRequired()
   })
 
   it('誤りを直すと入力中にエラーが消える', async () => {
@@ -67,10 +80,11 @@ describe('ReservationForm', () => {
     await user.selectOptions(screen.getByLabelText(/お受け取り時間/), '11時〜13時')
     await user.click(screen.getByRole('radio', { name: '季節の詰合せ 六個入' }))
 
-    await user.click(screen.getByRole('button', { name: 'この内容で予約する' }))
+    await user.click(screen.getByRole('button', { name: '入力内容を確認する' }))
 
     const status = await screen.findByRole('status', undefined, { timeout: 3000 })
-    expect(status).toHaveTextContent('ご予約内容を受け付けました')
-    expect(status).toHaveTextContent('実際の送信は行われません')
+    expect(status).toHaveTextContent('予約フォームのデモが完了しました')
+    expect(status).toHaveTextContent('入力された内容は保存・送信されていません')
+    expect(status).toHaveTextContent('予約も成立していません')
   })
 })

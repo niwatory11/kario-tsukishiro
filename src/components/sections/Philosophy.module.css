@@ -24,9 +24,9 @@
   background: linear-gradient(
     180deg,
     var(--c-tetsukon) 0%,
-    #46596c 34%,
-    #93a7b5 62%,
-    #cfdde6 82%,
+    var(--c-akatsuki-fukai) 34%,
+    var(--c-akatsuki) 62%,
+    var(--c-akatsuki-usui) 82%,
     var(--c-geppaku) 100%
   );
 }

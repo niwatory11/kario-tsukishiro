@@ -14,6 +14,12 @@
   --c-usuai: #e4edf2; /* 淡藍: 交互セクションの地 */
   --c-tetsukon: #1c2a38; /* 鉄紺: 夜空・フッター */
   --c-yoru-fukai: #141f2b; /* 鉄紺より深い夜 */
+  --c-yozora: #10161f; /* 夜空: ヒーロー上端 */
+  --c-yozora-naka: #16222e; /* 夜空: ヒーロー中間 */
+  --c-akatsuki-fukai: #46596c; /* 暁: 夜明けの濃色 */
+  --c-akatsuki: #93a7b5; /* 暁: 夜明けの中間色 */
+  --c-akatsuki-usui: #cfdde6; /* 暁: 夜明けの淡色 */
+  --c-yugure: #d5e2ea; /* 夕暮れ: 予約セクション終端 */
   --c-aisumi: #2a3640; /* 藍墨: 本文 */
   --c-azuki: #8e4a43; /* 小豆: CTA・アクセント */
   --c-azuki-koi: #7a3d37; /* 小豆(濃): hover */
@@ -41,6 +47,11 @@
   --color-field-bg: #ffffff;
   --color-focus: #2f6690; /* 藍のフォーカスリング */
   --color-focus-on-night: #9cc4e4;
+  --color-hero-wave: #46586b;
+  --color-header-surface: rgb(243 248 250 / 0.92);
+  --color-drawer-overlay: rgb(20 31 43 / 0.55);
+  --color-night-hover: rgb(255 255 255 / 0.06);
+  --color-form-surface: rgb(255 255 255 / 0.55);
 
   /* ---- タイポグラフィ ---- */
   --font-display: 'Shippori Mincho', 'Yu Mincho', 'Hiragino Mincho ProN', serif;

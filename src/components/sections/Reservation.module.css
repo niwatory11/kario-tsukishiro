@@ -1,6 +1,6 @@
 /* 一日の終わりへ: 月白からわずかに藍へ暮れていく */
 .section {
-  background: linear-gradient(180deg, var(--c-geppaku) 0%, #d5e2ea 100%);
+  background: linear-gradient(180deg, var(--c-geppaku) 0%, var(--c-yugure) 100%);
 }
 
 .layout {
@@ -56,7 +56,7 @@
 }
 
 .formWrap {
-  background: rgb(255 255 255 / 0.55);
+  background: var(--color-form-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
   padding: clamp(var(--space-6), 4vw, var(--space-8));

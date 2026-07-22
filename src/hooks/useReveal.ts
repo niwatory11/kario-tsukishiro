@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 type UseRevealOptions = {
@@ -17,12 +17,15 @@ export function useReveal<T extends HTMLElement>({
   rootMargin = '0px 0px -10% 0px',
   once = true,
 }: UseRevealOptions = {}) {
-  const ref = useRef<T | null>(null)
+  const elementRef = useRef<T | null>(null)
+  const ref = useCallback((element: T | null) => {
+    elementRef.current = element
+  }, [])
   const prefersReducedMotion = usePrefersReducedMotion()
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const element = ref.current
+    const element = elementRef.current
     if (!element) return
     if (prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
       setIsVisible(true)

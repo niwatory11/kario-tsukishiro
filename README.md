@@ -37,7 +37,7 @@ React + TypeScript + Vite による1ページ構成のレスポンシブサイ�
 | ビルド | Vite 8 |
 | スタイル | CSS Modules + CSS Custom Properties(デザイントークン) |
 | フォント | @fontsource(セルフホスト・unicode-rangeスライス配信) |
-| テスト | Vitest + Testing Library(39件) |
+| テスト | Vitest + Testing Library(40件) |
 | lint | oxlint |
 
 アニメーションライブラリ・CSSフレームワークは使用していません(依存は最小限)。
@@ -66,7 +66,7 @@ npm run preview    # production buildの確認
 
 ## アクセシビリティ
 
-- ランドマークと `aria-labelledby` によるセクション構造、h1〜h4の正しい階層
+- ランドマークと `aria-labelledby` によるセクション構造、h1〜h3の正しい階層
 - スキップリンク、`:focus-visible` のフォーカスリング(夜色背景では明色に切替)
 - ドロワーのフォーカストラップとフォーカス返却
 - 装飾SVGは `aria-hidden`、意味のあるSVGは `role="img"` + 説明
