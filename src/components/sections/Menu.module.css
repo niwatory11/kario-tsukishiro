@@ -55,6 +55,23 @@
   color: var(--color-text-muted);
 }
 
+.closing {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px dotted var(--c-ginnezu);
+  font-size: var(--fs-small);
+  max-width: 40rem;
+}
+
+.closing a {
+  color: var(--color-accent);
+  text-underline-offset: 0.25em;
+}
+
+.closing a:hover {
+  color: var(--color-accent-strong);
+}
+
 @media (min-width: 1024px) {
   .groups {
     flex-direction: row;

@@ -94,7 +94,8 @@ export function Shop() {
               </div>
             </dl>
             <p className={styles.note}>
-              店内の喫茶は六席のみ。売り切れ仕舞いのため、確実なお受け取りにはご予約をおすすめします。
+              店内の喫茶は六席のみ。売り切れ仕舞いのため、確実なお受け取りには
+              <a href="#reserve">ご予約</a>をおすすめします。
             </p>
           </Reveal>
 

@@ -33,6 +33,12 @@ export function Menu() {
             </Reveal>
           ))}
         </div>
+
+        {/* 価格を見終えた直後に次の一歩を置く(理解の直後のCTA) */}
+        <Reveal as="p" className={styles.closing}>
+          ご進物用の包装も承ります。お受け取り日が決まりましたら、
+          <a href="#reserve">ご予約フォーム</a>へどうぞ。
+        </Reveal>
       </div>
     </section>
   )
