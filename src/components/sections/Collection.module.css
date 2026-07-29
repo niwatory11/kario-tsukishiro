@@ -37,6 +37,14 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: var(--radius);
+  transition: scale var(--dur-reveal) var(--ease-out);
+}
+
+/* 触れると菓子へゆっくり寄る(タッチ端末・reduced-motion では発火しない) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .artWrap:hover .art {
+    scale: 1.03;
+  }
 }
 
 /* いま提供中の菓子は主役として一回り大きく組む */

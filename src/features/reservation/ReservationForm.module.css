@@ -135,7 +135,9 @@ textarea.input {
   font-weight: 500;
   letter-spacing: 0.14em;
   cursor: pointer;
-  transition: background-color 0.25s var(--ease-out);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    scale var(--dur-fast) var(--ease-out);
 }
 
 .submit:hover:not(:disabled) {

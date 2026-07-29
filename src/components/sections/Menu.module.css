@@ -91,6 +91,7 @@
 .closing a {
   color: var(--color-accent);
   text-underline-offset: 0.25em;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .closing a:hover {

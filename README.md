@@ -44,7 +44,7 @@ React + TypeScript + Vite による1ページ構成のレスポンシブサイ�
 | テスト | Vitest + Testing Library(40件) |
 | lint | oxlint |
 
-アニメーションライブラリ・CSSフレームワークは使用していません(依存は最小限)。
+アニメーションライブラリ・CSSフレームワークは使用していません(依存は最小限)。動きはすべて素の CSS(opacity / translate / scale)で実装しています。
 
 ## セットアップ
 

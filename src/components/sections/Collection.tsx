@@ -37,8 +37,7 @@ export function Collection() {
 
         <ul className={styles.list}>
           {sweets.map((sweet) => (
-            <Reveal
-              as="li"
+            <li
               key={sweet.id}
               className={
                 sweet.current
@@ -46,15 +45,15 @@ export function Collection() {
                   : styles.item
               }
             >
-              <div className={styles.artWrap}>
+              <Reveal className={styles.artWrap}>
                 <img
                   src={sweetImages[sweet.id]}
                   alt={sweet.artAlt}
                   loading="lazy"
                   className={styles.art}
                 />
-              </div>
-              <div className={styles.body}>
+              </Reveal>
+              <Reveal className={styles.body} delay={0.12}>
                 <h3 className={styles.name}>
                   {sweet.name}
                   <span className={styles.reading}>{sweet.reading}</span>
@@ -71,8 +70,8 @@ export function Collection() {
                   <p className={styles.desc}>{sweet.description}</p>
                   <p className={styles.price}>{sweet.price}</p>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ul>
       </div>

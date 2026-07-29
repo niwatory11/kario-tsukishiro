@@ -33,7 +33,7 @@
 - 角丸は `--radius`(2px)以外使わない(円形の意匠・SVG内は例外)
 - ブレークポイントは 480 / 768 / 1024 / 1280px の生値をモバイルファースト(`min-width`)で統一
 - 共通レイアウトは `global.css` の `.container` / `.section`、装飾はCSS Modules側に書く
-- スクロール演出は `useReveal` + `.reveal` の「フェード+16px上昇」のみ。新しい動きを足すときは reduced-motion での無効化を必ず確認
+- スクロール演出は `useReveal` + `.reveal` の「フェード+16px上昇」のみ。hover・押下・ドロワー開閉などのマイクロインタラクションは opacity / translate / scale をモーショントークン(`--dur-fast/base/slow/reveal` + `--ease-out`)で動かす範囲に限定。新しい動きを足すときは reduced-motion での無効化を必ず確認
 - コピー(文言・価格)は `src/data/` に置き、コンポーネントに直書きしない
 
 ## コマンド

@@ -4,9 +4,9 @@
   z-index: 50;
   height: var(--header-h);
   transition:
-    background-color 0.35s var(--ease-out),
-    color 0.35s var(--ease-out),
-    border-color 0.35s var(--ease-out);
+    background-color var(--dur-slow) var(--ease-out),
+    color var(--dur-slow) var(--ease-out),
+    border-color var(--dur-slow) var(--ease-out);
   border-bottom: 1px solid transparent;
 }
 
@@ -77,7 +77,7 @@
   text-decoration: none;
   white-space: nowrap;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s var(--ease-out);
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
 
 .navLink:hover {
@@ -106,7 +106,9 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   border-radius: var(--radius);
-  transition: background-color 0.25s var(--ease-out);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    scale var(--dur-fast) var(--ease-out);
 }
 
 .reserveButton:hover {
@@ -131,6 +133,7 @@
   font-size: var(--fs-small);
   letter-spacing: 0.1em;
   cursor: pointer;
+  transition: scale var(--dur-fast) var(--ease-out);
 }
 
 .menuIcon {

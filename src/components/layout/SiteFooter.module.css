@@ -50,12 +50,14 @@
   min-height: var(--tap-min);
   font-size: var(--fs-small);
   letter-spacing: 0.1em;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
 }
 
 .navLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+  text-decoration-color: currentColor;
 }
 
 .legal {
