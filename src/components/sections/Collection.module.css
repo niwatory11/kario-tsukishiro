@@ -34,7 +34,9 @@
 
 .art {
   width: min(100%, 260px);
-  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
 
 /* いま提供中の菓子は主役として一回り大きく組む */

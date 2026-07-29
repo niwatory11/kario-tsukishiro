@@ -2,6 +2,31 @@
   background: var(--color-bg-alt);
 }
 
+.photos {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.photo {
+  margin: 0;
+}
+
+.photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 6 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.photoCaption {
+  margin-top: var(--space-2);
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -59,6 +84,13 @@
   margin-top: var(--space-2);
   font-size: var(--fs-caption);
   color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .photos {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
 }
 
 @media (min-width: 1024px) {

@@ -1,6 +1,8 @@
 import { shopInfo } from '../../data/shop'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
+import shopFacade from '../../assets/shop-facade.webp'
+import shopInterior from '../../assets/shop-interior.webp'
 import styles from './Shop.module.css'
 
 function AreaMap() {
@@ -62,6 +64,34 @@ export function Shop() {
           kana="やなかのろじおく"
           title="店舗案内"
         />
+
+        {/* 店の空気感を先に見せてから所在地情報へ(写真はAI生成) */}
+        <div className={styles.photos}>
+          <Reveal as="figure" className={styles.photo}>
+            <img
+              src={shopFacade}
+              alt="夜の路地に行灯がともり、藍色の暖簾がかかった小さな和菓子店の店構え"
+              loading="lazy"
+              width={960}
+              height={800}
+            />
+            <figcaption className={styles.photoCaption}>
+              店構え(イメージ)
+            </figcaption>
+          </Reveal>
+          <Reveal as="figure" delay={0.15} className={styles.photo}>
+            <img
+              src={shopInterior}
+              alt="白木のカウンターに抹茶と上生菓子が置かれた、灯りのやわらかな喫茶席の店内"
+              loading="lazy"
+              width={960}
+              height={800}
+            />
+            <figcaption className={styles.photoCaption}>
+              店内・喫茶(イメージ)
+            </figcaption>
+          </Reveal>
+        </div>
 
         <div className={styles.layout}>
           <Reveal className={styles.info}>

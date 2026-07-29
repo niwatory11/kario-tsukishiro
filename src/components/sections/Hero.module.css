@@ -16,29 +16,36 @@
   outline-color: var(--color-focus-on-night);
 }
 
-.moonWrap {
+/* 写真は夜空グラデーションの上にフェードインし、「月の出」を写真の登場で表現する */
+.bgWrap {
   position: absolute;
-  top: clamp(4rem, 10vh, 7rem);
-  left: clamp(-3rem, -6vw, 0rem);
-  width: clamp(180px, 30vw, 320px);
-  animation: moonrise 1.8s var(--ease-out) both;
+  inset: 0;
 }
 
-@keyframes moonrise {
+.bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top; /* 月(左上)を常に残す */
+  animation: bgFade 1.8s var(--ease-out) both;
+}
+
+@keyframes bgFade {
   from {
     opacity: 0;
-    translate: 0 32px;
   }
 
   to {
     opacity: 1;
-    translate: 0 0;
   }
 }
 
-.moon {
-  width: 100%;
-  height: auto;
+/* 下部の白文字(サブコピー・注記)のコントラストを確保する薄い夜色 */
+.bgWrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, var(--color-hero-overlay));
 }
 
 .inner {
@@ -136,9 +143,5 @@
 @media (min-width: 768px) {
   .heading {
     line-height: 1.9;
-  }
-
-  .moonWrap {
-    left: clamp(-2rem, 2vw, 6rem);
   }
 }

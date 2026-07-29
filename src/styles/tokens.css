@@ -48,6 +48,7 @@
   --color-focus: #2f6690; /* 藍のフォーカスリング */
   --color-focus-on-night: #9cc4e4;
   --color-hero-wave: #46586b;
+  --color-hero-overlay: rgb(16 22 31 / 0.55); /* ヒーロー写真下部の文字コントラスト確保 */
   --color-header-surface: rgb(243 248 250 / 0.92);
   --color-drawer-overlay: rgb(20 31 43 / 0.55);
   --color-night-hover: rgb(255 255 255 / 0.06);

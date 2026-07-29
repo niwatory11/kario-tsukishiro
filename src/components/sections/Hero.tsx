@@ -1,29 +1,18 @@
 import { LinkButton } from '../ui/LinkButton'
 import { WavePattern } from '../ui/WavePattern'
+import heroDesktop from '../../assets/hero-desktop.webp'
+import heroMobile from '../../assets/hero-mobile.webp'
 import styles from './Hero.module.css'
 
-function Moon() {
-  return (
-    <svg viewBox="0 0 300 300" className={styles.moon} aria-hidden="true">
-      <defs>
-        <radialGradient id="moon-halo">
-          <stop offset="0%" stopColor="#f3f8fa" stopOpacity="0.32" />
-          <stop offset="45%" stopColor="#f3f8fa" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#f3f8fa" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <circle cx="150" cy="150" r="150" fill="url(#moon-halo)" />
-      <circle cx="150" cy="150" r="62" fill="#edf3f6" />
-    </svg>
-  )
-}
-
-/** ファーストビュー: 月が昇る直前の夜空 */
+/** ファーストビュー: 月夜の空(AI生成画像。文言は見出しが持つため装飾扱い) */
 export function Hero() {
   return (
     <section id="top" aria-label="菓寮 月白 — 季節の上生菓子" className={styles.hero}>
-      <div className={styles.moonWrap} aria-hidden="true">
-        <Moon />
+      <div className={styles.bgWrap} aria-hidden="true">
+        <picture>
+          <source media="(min-width: 768px)" srcSet={heroDesktop} />
+          <img src={heroMobile} alt="" className={styles.bg} />
+        </picture>
       </div>
 
       <div className={`container ${styles.inner}`}>

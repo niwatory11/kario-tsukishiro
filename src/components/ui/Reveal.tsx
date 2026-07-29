@@ -6,7 +6,7 @@ type RevealProps = {
   /** 秒単位の遅延(連続する要素の段差用) */
   delay?: number
   className?: string
-  as?: 'div' | 'li' | 'article' | 'p'
+  as?: 'div' | 'li' | 'article' | 'p' | 'figure'
 }
 
 /** スクロールで下から浮かび上がる汎用ラッパー */

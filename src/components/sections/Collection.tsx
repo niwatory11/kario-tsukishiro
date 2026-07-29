@@ -1,8 +1,20 @@
+import type { SweetSeason } from '../../data/sweets'
 import { sweets } from '../../data/sweets'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
-import { WagashiArt } from '../ui/WagashiArt'
+import sweetSpring from '../../assets/sweet-spring.webp'
+import sweetSummer from '../../assets/sweet-summer.webp'
+import sweetAutumn from '../../assets/sweet-autumn.webp'
+import sweetWinter from '../../assets/sweet-winter.webp'
 import styles from './Collection.module.css'
+
+/* 商品写真はAI生成(プロンプト: docs/image-prompts.md) */
+const sweetImages: Record<SweetSeason, string> = {
+  spring: sweetSpring,
+  summer: sweetSummer,
+  autumn: sweetAutumn,
+  winter: sweetWinter,
+}
 
 /** 季節の上生菓子(サービス内容の中核) */
 export function Collection() {
@@ -35,9 +47,10 @@ export function Collection() {
               }
             >
               <div className={styles.artWrap}>
-                <WagashiArt
-                  variant={sweet.id}
-                  label={sweet.artAlt}
+                <img
+                  src={sweetImages[sweet.id]}
+                  alt={sweet.artAlt}
+                  loading="lazy"
                   className={styles.art}
                 />
               </div>
