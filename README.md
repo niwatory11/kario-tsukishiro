@@ -16,7 +16,7 @@ React + TypeScript + Vite による1ページ構成のレスポンシブサイ�
 - **配色**: 日本の伝統色から採取(月白・鉄紺・藍墨・小豆・白緑・銀鼠)
 - **タイポグラフィ**: 見出しにしっぽり明朝、本文にZen角ゴシックNew。ヒーローの大見出しと菓銘は縦書き(`writing-mode: vertical-rl`)
 - **ビジュアル**: 地図・青海波文様などの図版は自作SVG/CSS。ヒーローの月夜・商品・店舗の写真はAI画像生成で制作(プロンプトは `docs/image-prompts.md`)
-- **モーション**: IntersectionObserverによる控えめなフェードイン、青海波のゆらぎ、ヘッダーの透過遷移のみ。`prefers-reduced-motion` で全停止
+- **モーション**: スクロール連動の二段リビール(菓子の画像が先、菓銘と言葉が0.12s遅れて現れる)、商品画像のhover微zoom、ドロワーのスライドイン、青海波のゆらぎ、ヘッダーの透過遷移。durationとeasingはデザイントークン(`--dur-fast/base/slow/reveal` + `--ease-out`)に統一し、`prefers-reduced-motion` で全停止
 
 ### 設計根拠(市場調査ベース)
 
@@ -77,6 +77,24 @@ npm run preview    # production buildの確認
 - 本文コントラスト4.5:1以上、タップ領域44px以上
 - `prefers-reduced-motion: reduce` でアニメーション・smooth scrollを無効化
 
+## Lighthouse スコア
+
+production build(`npm run preview`)に対する Lighthouse 12 のローカル計測結果:
+
+| カテゴリ | Mobile | Desktop |
+|---|---|---|
+| Performance | 46 | 65 |
+| Accessibility | **100** | **100** |
+| Best Practices | **100** | **100** |
+| SEO | **100** | **100** |
+
+Performance の失点は原因を把握した上でのトレードオフです:
+
+- LCP要素(ヒーローの縦書き見出し)がフェードイン演出の完了を待ってから確定する(LCP内訳の96%がRender Delay)— 「月が昇る」導入演出を優先
+- セルフホスト日本語フォントの `@font-face` 群でCSSバンドルが大きく、モバイル計測(CPU 4xスロットリング)ではスタイル計算が重くなる — フォント品質とオフライン再現性を優先
+
+※ WSL2上のシミュレーテッドスロットリング計測のため、Performanceは実行環境により変動します(mobileは複数回計測の中央値)。
+
 ## デプロイ
 
 `main` ブランチへのpushで、GitHub Actions(`.github/workflows/deploy.yml`)がlint・テスト・buildを実行し、GitHub Pagesへ自動デプロイします。
@@ -87,6 +105,22 @@ npm run preview    # production buildの確認
 他の静的ホスティング(Netlify / Vercel等)へは `npm run build` の `dist/` をそのまま配置できます(その場合 `base` を `'/'` に戻してください)。
 
 > 補足: 日本語フォントをセルフホストしているため `dist/` のファイル数は多めですが、unicode-rangeスライスにより実際の転送は使用グリフ分のみです。
+
+## アニメーションデモ
+
+動きはすべて素のCSS(opacity / translate / scale)+モーショントークンで実装しています(仕様は [docs/animation-spec.md](docs/animation-spec.md))。
+
+**二段リビール** — スクロールで菓子の画像が先に、菓銘と言葉が一拍遅れて現れます。
+
+![スクロールに応じて季節の菓子カードが「画像→テキスト」の順に二段階でフェードインする様子](docs/media/reveal.gif)
+
+**商品画像のhover微zoom** — カーソルを重ねると写真がゆっくり寄ります(scale 1.03)。
+
+![商品写真にカーソルを重ねるとゆっくり拡大する様子](docs/media/hover-zoom.gif)
+
+**モバイルドロワー** — スライドインで開き、フォーカストラップ・Escapeで閉じる操作に対応。
+
+![ハンバーガーメニューを押すとドロワーが右からスライドインして開く様子](docs/media/drawer.gif)
 
 ## スクリーンショット
 
