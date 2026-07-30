@@ -55,6 +55,13 @@ try {
     await page.goto(URL, { waitUntil: 'networkidle' })
     await page.getByRole('button', { name: '入力内容を確認する' }).click()
     await page.getByRole('alert').waitFor()
+    // 送信でエラーサマリーへスクロールした後、ヘッダーの透過→月白地の切替は
+    // IntersectionObserver 経由で1〜2フレーム遅れる。過渡状態(明地に白文字)を
+    // 撮ると color-contrast が誤検出になるため、不透過化を待ってから検査する
+    await page.waitForFunction(() => {
+      const header = document.querySelector('header')
+      return header !== null && getComputedStyle(header).backgroundColor !== 'rgba(0, 0, 0, 0)'
+    })
   })
 } finally {
   await browser.close()
