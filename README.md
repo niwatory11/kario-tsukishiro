@@ -60,6 +60,7 @@ npm run lint       # oxlint
 npm run typecheck  # tsc -b(TypeScript strict)
 npm run test       # vitest(バリデーション・フォーム・ドロワー・スモーク)
 npm run build      # 型チェック + production build(dist/)
+npm run test:a11y  # axe-coreによるアクセシビリティ検査(要build)
 npm run preview    # production buildの確認
 ```
 
@@ -76,6 +77,7 @@ npm run preview    # production buildの確認
 - 装飾SVGは `aria-hidden`、意味のあるSVGは `role="img"` + 説明
 - 本文コントラスト4.5:1以上、タップ領域44px以上
 - `prefers-reduced-motion: reduce` でアニメーション・smooth scrollを無効化
+- **axe-core による自動検査をCIで実行**(デスクトップ・ドロワー開・フォームエラー表示の3状態。violationが1件でもあればデプロイを中止)
 
 ## Lighthouse スコア
 
