@@ -67,7 +67,18 @@
   letter-spacing: 0.22em;
   line-height: 1.75;
   margin-right: clamp(0rem, 3vw, 4rem);
-  animation: fadeUp 1.2s var(--ease-out) 0.35s both;
+  /* 見出しはLCP要素。opacityを動かすとLCP確定が遅れるため translate のみ動かす */
+  animation: riseIn 1.2s var(--ease-out) 0.35s both;
+}
+
+@keyframes riseIn {
+  from {
+    translate: 0 20px;
+  }
+
+  to {
+    translate: 0 0;
+  }
 }
 
 @keyframes fadeUp {

@@ -83,17 +83,18 @@ production build(`npm run preview`)に対する Lighthouse 12 のローカル計
 
 | カテゴリ | Mobile | Desktop |
 |---|---|---|
-| Performance | 46 | 65 |
+| Performance | **98** | **100** |
 | Accessibility | **100** | **100** |
 | Best Practices | **100** | **100** |
 | SEO | **100** | **100** |
 
-Performance の失点は原因を把握した上でのトレードオフです:
+当初 Performance は mobile 46 / desktop 65 でした。原因を分析し、3つの改善で引き上げています:
 
-- LCP要素(ヒーローの縦書き見出し)がフェードイン演出の完了を待ってから確定する(LCP内訳の96%がRender Delay)— 「月が昇る」導入演出を優先
-- セルフホスト日本語フォントの `@font-face` 群でCSSバンドルが大きく、モバイル計測(CPU 4xスロットリング)ではスタイル計算が重くなる — フォント品質とオフライン再現性を優先
+- **LCPの即時確定**: LCP要素であるヒーロー見出しのアニメーションから opacity を外し、上昇(translate)のみに変更(LCP: mobile 11.2s → 1.8s)
+- **srcset対応**: 商品画像に 320/480/720w の3段バリアントを用意し、表示幅とDPRに見合う一枚だけを配信
+- **インライン化の抑止**: `assetsInlineLimit: 0` で、フォントスライスや小画像がCSS/JSにbase64埋め込みされるのを防止(CSS転送 −45%)。unicode-range・srcset の「必要な分だけ取得する」設計とインライン化は両立しないため
 
-※ WSL2上のシミュレーテッドスロットリング計測のため、Performanceは実行環境により変動します(mobileは複数回計測の中央値)。
+※ ローカル(WSL2)でのシミュレーテッドスロットリング計測。mobileは複数回計測で安定を確認。
 
 ## デプロイ
 
