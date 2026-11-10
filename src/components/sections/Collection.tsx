@@ -1,5 +1,5 @@
-import type { SweetSeason } from '../../data/sweets'
-import { sweets } from '../../data/sweets'
+import type { Sweet, SweetSeason } from '../../data/sweets'
+import { collectionLede, currentLabel, sweets } from '../../data/sweets'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
 import sweetSpring from '../../assets/sweet-spring.webp'
@@ -37,13 +37,60 @@ const sweetImages: Record<SweetSeason, { src: string; srcSet: string }> = {
   },
 }
 
-/* 実測の表示幅。通常の菓子は常に260px、いまの季節の菓子だけ
-   480px未満で「画面幅 − containerとartWrapの左右余白」、以上で320px */
-const sizesDefault = '260px'
-const sizesCurrent = '(min-width: 480px) 320px, calc(100vw - 5.5rem)'
+/* 表示幅: いまの季節の菓子は1024px以上で約600px、ほかの三つは約330px(3列)。
+   それ未満は画面幅いっぱい(containerの左右余白を引いた幅)。720pxの原寸を上限に選ばせる */
+const sizesFeatured = '(min-width: 1024px) 600px, (min-width: 768px) 45vw, calc(100vw - 2.5rem)'
+const sizesOther = '(min-width: 1024px) 330px, (min-width: 768px) 30vw, calc(100vw - 2.5rem)'
 
-/** 季節の上生菓子(サービス内容の中核) */
+function SweetPhoto({ sweet, sizes }: { sweet: Sweet; sizes: string }) {
+  return (
+    <Reveal className={styles.artWrap}>
+      <img
+        src={sweetImages[sweet.id].src}
+        srcSet={sweetImages[sweet.id].srcSet}
+        sizes={sizes}
+        alt={sweet.artAlt}
+        width={720}
+        height={720}
+        loading="lazy"
+        decoding="async"
+        className={styles.art}
+      />
+    </Reveal>
+  )
+}
+
+/** 菓銘(縦書き)と、節気・説明・価格 */
+function SweetBody({ sweet, delay = 0.12 }: { sweet: Sweet; delay?: number }) {
+  return (
+    <Reveal className={styles.body} delay={delay}>
+      <h3 className={styles.name}>
+        {sweet.name}
+        <span className={styles.reading}>{sweet.reading}</span>
+      </h3>
+      <div className={styles.textCol}>
+        <p className={styles.meta}>
+          <span className={styles.sekki}>
+            {sweet.seasonLabel} ・ {sweet.sekki}
+          </span>
+          {sweet.current && <span className={styles.current}>{currentLabel}</span>}
+        </p>
+        <p className={styles.desc}>{sweet.description}</p>
+        <p className={styles.price}>{sweet.price}</p>
+      </div>
+    </Reveal>
+  )
+}
+
+/**
+ * 季節の上生菓子(サービス内容の中核)。
+ * いま提供中の一品を大きな写真で主役に据え、残りの三季は写真つきの三列で並べる。
+ * 写真は皿の余白が広いので、4:5 に切り出して少し寄り、菓子そのものを大きく見せる。
+ */
 export function Collection() {
+  const featured = sweets.find((sweet) => sweet.current)
+  const others = sweets.filter((sweet) => !sweet.current)
+
   return (
     <section
       id="collection"
@@ -56,49 +103,20 @@ export function Collection() {
           kana="はる なつ あき ふゆ"
           title="季節の菓子"
         />
-        <p className={styles.lede}>
-          店先に並ぶのは、その節気の菓子ひとそろいだけ。
-          春夏秋冬から、それぞれの代表銘をご紹介します。
-        </p>
+        <p className={styles.lede}>{collectionLede}</p>
+
+        {featured && (
+          <article className={styles.featured}>
+            <SweetPhoto sweet={featured} sizes={sizesFeatured} />
+            <SweetBody sweet={featured} />
+          </article>
+        )}
 
         <ul className={styles.list}>
-          {sweets.map((sweet) => (
-            <li
-              key={sweet.id}
-              className={
-                sweet.current
-                  ? `${styles.item} ${styles.itemCurrent}`
-                  : styles.item
-              }
-            >
-              <Reveal className={styles.artWrap}>
-                <img
-                  src={sweetImages[sweet.id].src}
-                  srcSet={sweetImages[sweet.id].srcSet}
-                  sizes={sweet.current ? sizesCurrent : sizesDefault}
-                  alt={sweet.artAlt}
-                  loading="lazy"
-                  className={styles.art}
-                />
-              </Reveal>
-              <Reveal className={styles.body} delay={0.12}>
-                <h3 className={styles.name}>
-                  {sweet.name}
-                  <span className={styles.reading}>{sweet.reading}</span>
-                </h3>
-                <div className={styles.textCol}>
-                  <p className={styles.meta}>
-                    <span className={styles.sekki}>
-                      {sweet.seasonLabel} ・ {sweet.sekki}
-                    </span>
-                    {sweet.current && (
-                      <span className={styles.current}>いまの季節</span>
-                    )}
-                  </p>
-                  <p className={styles.desc}>{sweet.description}</p>
-                  <p className={styles.price}>{sweet.price}</p>
-                </div>
-              </Reveal>
+          {others.map((sweet, index) => (
+            <li key={sweet.id} className={styles.item}>
+              <SweetPhoto sweet={sweet} sizes={sizesOther} />
+              <SweetBody sweet={sweet} delay={0.08 + index * 0.08} />
             </li>
           ))}
         </ul>

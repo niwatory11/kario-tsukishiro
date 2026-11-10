@@ -1,43 +1,60 @@
+import { aboutIntro, aboutValues, colorSwatch } from '../../data/about'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
 import styles from './Philosophy.module.css'
 
-const values = [
-  {
-    title: '朝に炊く餡',
-    body: '小豆はその日の分だけ、夜明けとともに炊き上げます。餡の香りがいちばん立つのは、炊いてから半日のあいだだからです。',
-  },
-  {
-    title: '節気にあわせた意匠',
-    body: '暦は二十四の節気で巡ります。店先の菓子も同じ速さで姿を変え、いまの季節にしか出会えない意匠をお届けします。',
-  },
-  {
-    title: 'ひとつずつの手しごと',
-    body: '木型に頼らず、指先とへらだけでかたちを結びます。同じ菓銘でも、ひとつとして同じ表情はありません。',
-  },
-]
+/**
+ * 屋号の色の見本帳。夜の地の上に、月白の色の札が月のように浮かぶ。
+ * 色はサイトの地色そのもの(--c-geppaku)で、屋号とデザインが同じ色だと見せる。
+ */
+function ColorSwatch() {
+  return (
+    <Reveal delay={0.15} className={styles.swatchWrap}>
+      <figure className={styles.swatch}>
+        <div className={styles.chip}>
+          <p className={styles.chipName} aria-hidden="true">
+            {colorSwatch.name}
+          </p>
+        </div>
+        <figcaption className={styles.swatchCaption}>
+          <span className={styles.swatchTitle}>
+            {colorSwatch.name}
+            <span className={styles.swatchReading}>{colorSwatch.reading}</span>
+            <span className={styles.swatchKind}>{colorSwatch.kind}</span>
+          </span>
+          <span className={styles.swatchDesc}>{colorSwatch.description}</span>
+          <span className={styles.swatchCode}>
+            {colorSwatch.siteNote}
+            <span className={styles.code}>{colorSwatch.code}</span>
+          </span>
+        </figcaption>
+      </figure>
+    </Reveal>
+  )
+}
 
 /** ブランド紹介: 夜空が月白へ白んでいく遷移を挟む */
 export function Philosophy() {
   return (
     <section id="about" aria-labelledby="about-heading" className={styles.section}>
       <div className={styles.night}>
-        <div className="container">
-          <SectionHeading
-            id="about-heading"
-            kana="やごうのこと"
-            title="月白について"
-            onNight
-          />
-          <Reveal>
-            <p className={styles.intro}>
-              月白(つきしろ)とは、月が昇る直前、東の空がしろがねに明るむひとときを指す色の名。
-            </p>
-            <p className={styles.intro}>
-              菓寮
-              月白は、その静かな待ち遠しさをひと椀の菓子にうつす、東京・谷中の小さな和菓子店です。派手さよりも、季節の気配を。暦とともに、今日の菓子を仕立てています。
-            </p>
-          </Reveal>
+        <div className={`container ${styles.nightInner}`}>
+          <div className={styles.introCol}>
+            <SectionHeading
+              id="about-heading"
+              kana="やごうのこと"
+              title="月白について"
+              onNight
+            />
+            <Reveal>
+              {aboutIntro.map((paragraph) => (
+                <p key={paragraph.slice(0, 10)} className={styles.intro}>
+                  {paragraph}
+                </p>
+              ))}
+            </Reveal>
+          </div>
+          <ColorSwatch />
         </div>
       </div>
 
@@ -47,7 +64,7 @@ export function Philosophy() {
       <div className={styles.day}>
         <div className="container">
           <ul className={styles.values}>
-            {values.map((value, index) => (
+            {aboutValues.map((value, index) => (
               <Reveal
                 as="li"
                 key={value.title}

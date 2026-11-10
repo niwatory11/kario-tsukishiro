@@ -63,3 +63,9 @@ export const sweets: Sweet[] = [
     price: '486円(税込)',
   },
 ]
+
+export const collectionLede =
+  '店先に並ぶのは、その節気の菓子ひとそろいだけ。春夏秋冬から、それぞれの代表銘をご紹介します。'
+
+/** いま提供中の菓子に添える札 */
+export const currentLabel = 'いまの季節'

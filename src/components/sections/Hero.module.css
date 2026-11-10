@@ -126,8 +126,11 @@
   overflow: hidden;
 }
 
+/* 1周期(56px)ぶん広く描いて左へ流す。全体の初期設定 svg { max-width: 100% } が
+   効くと幅が画面幅に縮み、流れた分だけ右端に地の色が欠けて見えるため、ここで外す */
 .wave {
   width: calc(100% + 56px);
+  max-width: none;
   height: 100%;
   animation: drift 9s linear infinite;
 }

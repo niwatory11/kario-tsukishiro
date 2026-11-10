@@ -8,14 +8,124 @@
   padding-block: var(--section-pad) var(--space-8);
 }
 
+.nightInner {
+  display: grid;
+  gap: var(--space-12);
+}
+
 .intro {
-  max-width: 36em;
+  max-width: 34em;
   font-size: var(--fs-body-lg);
   color: var(--color-text-on-night);
 }
 
 .intro + .intro {
   margin-top: var(--space-6);
+}
+
+/* ---------- 色見本の札 ---------- */
+
+/* スマホでは札を小さく正方形に(縦に長い札が一画面を占めないように) */
+.swatchWrap {
+  max-width: 15rem;
+}
+
+.swatch {
+  margin: 0;
+}
+
+/* 札の色はサイトの地色(月白)。下端だけ暁の色へ沈め、夜の地から月のように浮かせる */
+.chip {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    180deg,
+    var(--c-geppaku) 0%,
+    var(--c-geppaku) 58%,
+    var(--c-akatsuki-usui) 100%
+  );
+  box-shadow: 0 0 90px -10px color-mix(in srgb, var(--c-geppaku) 22%, transparent);
+}
+
+.chipName {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--space-8);
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.8rem + 2.6vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: 0.3em;
+  color: var(--c-tetsukon);
+}
+
+.swatchCaption {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--color-text-on-night);
+}
+
+.swatchTitle {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  letter-spacing: 0.2em;
+}
+
+.swatchReading,
+.swatchKind {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.24em;
+  color: var(--color-text-on-night-muted);
+}
+
+.swatchDesc {
+  font-size: var(--fs-small);
+  color: var(--color-text-on-night-muted);
+}
+
+.swatchCode {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid color-mix(in srgb, var(--color-text-on-night) 18%, transparent);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.14em;
+  color: var(--color-text-on-night-muted);
+}
+
+.code {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  letter-spacing: 0.06em;
+  color: var(--color-text-on-night);
+}
+
+@media (min-width: 768px) {
+  .nightInner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: end;
+    gap: var(--space-16);
+  }
+
+  .swatchWrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .chip {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 /* 夜空が白む: このサイトの主題をそのまま視覚化する遷移帯 */
@@ -31,8 +141,9 @@
   );
 }
 
+/* 下の余白は半分に: 次の「季節の菓子」の上余白と重なり、空白が続いて見えていた */
 .day {
-  padding-block: var(--space-8) var(--section-pad);
+  padding-block: var(--space-8) calc(var(--section-pad) * 0.5);
 }
 
 .values {

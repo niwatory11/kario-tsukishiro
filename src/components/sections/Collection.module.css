@@ -9,13 +9,45 @@
   margin-bottom: var(--space-12);
 }
 
-.list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* ---------- 写真: 皿の余白を切り、菓子に寄る ---------- */
+
+.artWrap {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--color-bg-alt);
+}
+
+.art {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 60%;
+  scale: 1.12;
+  transition: scale var(--dur-reveal) var(--ease-out);
+}
+
+/* 触れると菓子へもう一歩寄る(タッチ端末・reduced-motion では発火しない) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .artWrap:hover .art {
+    scale: 1.16;
+  }
+}
+
+/* ---------- いまの季節(主役)と、ほかの三季 ---------- */
+
+.featured {
   display: flex;
   flex-direction: column;
-  gap: clamp(var(--space-12), 8vw, var(--space-24));
+  gap: var(--space-6);
+}
+
+.list {
+  list-style: none;
+  margin: clamp(var(--space-16), 8vw, var(--space-24)) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-12);
 }
 
 .item {
@@ -24,33 +56,12 @@
   gap: var(--space-6);
 }
 
-.artWrap {
-  background: var(--color-bg-alt);
-  border-radius: var(--radius);
-  padding: var(--space-6);
-  display: flex;
-  justify-content: center;
+/* スマホでは三季の写真を横長に切り、縦に長くなりすぎないようにする */
+.item .art {
+  aspect-ratio: 4 / 3;
 }
 
-.art {
-  width: min(100%, 260px);
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: var(--radius);
-  transition: scale var(--dur-reveal) var(--ease-out);
-}
-
-/* 触れると菓子へゆっくり寄る(タッチ端末・reduced-motion では発火しない) */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .artWrap:hover .art {
-    scale: 1.03;
-  }
-}
-
-/* いま提供中の菓子は主役として一回り大きく組む */
-.itemCurrent .art {
-  width: min(100%, 320px);
-}
+/* ---------- 文字 ---------- */
 
 .body {
   display: flex;
@@ -117,35 +128,61 @@
   padding-top: var(--space-3);
 }
 
-@media (min-width: 1024px) {
-  .item {
-    flex-direction: row;
+@media (min-width: 768px) {
+  /* 主役は 768px から写真と文字を左右に(画面幅いっぱいの縦長写真にしない) */
+  .featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
-    gap: var(--space-16);
+    gap: var(--space-8);
   }
 
-  /* 左右交互のジグザグでスクロールにリズムを作る */
-  .item:nth-child(even) {
-    flex-direction: row-reverse;
+  .featured .art {
+    aspect-ratio: 1 / 1;
   }
 
-  .artWrap {
-    flex: 0 0 42%;
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-8);
   }
 
-  .itemCurrent .artWrap {
-    flex-basis: 50%;
-    padding: var(--space-8);
+  .item .art {
+    aspect-ratio: 4 / 5;
+  }
+
+  .item .name {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  }
+
+  .item .desc {
+    font-size: var(--fs-small);
+  }
+
+  /* 同じ大きさの三枚が横一列に揃うと羅列に見えるので、段差でリズムを作る
+     (「月白について」の三つの約束と同じ段の付け方) */
+  .item:nth-child(2) {
+    margin-top: var(--space-12);
+  }
+
+  .item:nth-child(3) {
+    margin-top: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* 主役: 写真を左に大きく、菓銘を縦書きで右端に掛け軸のように */
+  .featured {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--space-12);
   }
 
   .body {
     flex-direction: row;
     justify-content: flex-end;
     gap: var(--space-8);
-    flex: 1;
   }
 
-  /* 菓銘は縦書きで、掛け軸のように右へ添える(DOM順は見出しが先) */
+  /* 菓銘は縦書き(DOM順は見出しが先) */
   .name {
     order: 2;
     writing-mode: vertical-rl;
@@ -158,5 +195,15 @@
   .textCol {
     order: 1;
     max-width: 30em;
+  }
+
+  /* 三季: 写真の下で、菓銘を右に縦書き・説明を左に */
+  .item .body {
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .item .name {
+    min-height: 5.5em;
   }
 }
