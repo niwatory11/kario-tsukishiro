@@ -1,0 +1,193 @@
+.koyomi {
+  margin-bottom: clamp(var(--space-12), 7vw, var(--space-16));
+  padding-block: var(--space-6);
+  border-block: 1px solid var(--color-line);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+}
+
+.date {
+  font-size: var(--fs-small);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.now {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* 今宵の月: 夜の小窓のなかに、光っている部分だけを月白で描く */
+.moon {
+  flex: none;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.moonSky {
+  fill: var(--c-tetsukon);
+}
+
+.moonShade {
+  fill: var(--c-akatsuki-fukai);
+}
+
+.moonLit {
+  fill: var(--c-geppaku);
+}
+
+.nowText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.sekki {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+
+.sekkiName {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+}
+
+.sekkiReading {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+}
+
+.sekkiSince {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.moonText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-2);
+  font-size: var(--fs-small);
+}
+
+.moonName {
+  font-family: var(--font-display);
+  font-size: var(--fs-body-lg);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.moonAge {
+  color: var(--color-text-muted);
+}
+
+/* 一年の目盛り: 二十四節気を等間隔に刻み、いまの節気の区間だけ小豆色にする */
+.ruler {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  align-items: end;
+  margin: var(--space-8) 0 0;
+  padding: var(--space-6) 0 0;
+  border-bottom: 1px solid var(--c-ginnezu);
+}
+
+.tick {
+  position: relative;
+  height: 0.5rem;
+  border-left: 1px solid var(--c-ginnezu);
+}
+
+/* 季節のはじまり(立春・立夏・立秋・立冬)は長い目盛り */
+.tick[data-season-start] {
+  height: 1rem;
+  border-left-color: var(--color-text);
+}
+
+.tick[data-current] {
+  height: 1rem;
+  border-left: 2px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+}
+
+.tickLabel {
+  position: absolute;
+  bottom: calc(100% + var(--space-1));
+  left: -2px;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  color: var(--color-accent);
+}
+
+/* 年の終わりに近い節気は、名前を右寄せにして枠からはみ出させない */
+.tickLabelEnd {
+  right: 0;
+  left: auto;
+  letter-spacing: 0.08em;
+}
+
+.seasons {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+}
+
+.seasons li[data-current] {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.note {
+  margin-top: var(--space-4);
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+  .koyomi {
+    padding-block: var(--space-8);
+  }
+
+  .now {
+    gap: var(--space-6);
+  }
+
+  .moon {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .nowText {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-12);
+  }
+}

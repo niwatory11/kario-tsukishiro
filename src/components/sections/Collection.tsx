@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import type { Sweet, SweetSeason } from '../../data/sweets'
 import { collectionLede, currentLabel, sweets } from '../../data/sweets'
+import { TodayKoyomi } from '../../features/koyomi/TodayKoyomi'
+import { getSeason, seasonsFrom } from '../../features/koyomi/koyomi'
 import { Reveal } from '../ui/Reveal'
 import { SectionHeading } from '../ui/SectionHeading'
 import sweetSpring from '../../assets/sweet-spring.webp'
@@ -61,7 +64,15 @@ function SweetPhoto({ sweet, sizes }: { sweet: Sweet; sizes: string }) {
 }
 
 /** 菓銘(縦書き)と、節気・説明・価格 */
-function SweetBody({ sweet, delay = 0.12 }: { sweet: Sweet; delay?: number }) {
+function SweetBody({
+  sweet,
+  delay = 0.12,
+  isCurrent = false,
+}: {
+  sweet: Sweet
+  delay?: number
+  isCurrent?: boolean
+}) {
   return (
     <Reveal className={styles.body} delay={delay}>
       <h3 className={styles.name}>
@@ -73,7 +84,7 @@ function SweetBody({ sweet, delay = 0.12 }: { sweet: Sweet; delay?: number }) {
           <span className={styles.sekki}>
             {sweet.seasonLabel} ・ {sweet.sekki}
           </span>
-          {sweet.current && <span className={styles.current}>{currentLabel}</span>}
+          {isCurrent && <span className={styles.current}>{currentLabel}</span>}
         </p>
         <p className={styles.desc}>{sweet.description}</p>
         <p className={styles.price}>{sweet.price}</p>
@@ -82,14 +93,24 @@ function SweetBody({ sweet, delay = 0.12 }: { sweet: Sweet; delay?: number }) {
   )
 }
 
+type CollectionProps = {
+  /** 暦を引く日。省くと、開いた日の日付になる(テストでは日付を固定して渡す) */
+  today?: Date
+}
+
 /**
  * 季節の上生菓子(サービス内容の中核)。
- * いま提供中の一品を大きな写真で主役に据え、残りの三季は写真つきの三列で並べる。
+ * 今日の暦からいまの季節を求め、その季節の一品を大きな写真で主役に据える。
+ * 残りの三季は、これから巡ってくる順に、写真つきの三列で並べる。
  * 写真は皿の余白が広いので、4:5 に切り出して少し寄り、菓子そのものを大きく見せる。
  */
-export function Collection() {
-  const featured = sweets.find((sweet) => sweet.current)
-  const others = sweets.filter((sweet) => !sweet.current)
+export function Collection({ today }: CollectionProps) {
+  // 開いているあいだに日付が変わっても、主役の菓子が途中で入れ替わらないようにする
+  const [now] = useState(() => today ?? new Date())
+  const ordered = seasonsFrom(getSeason(now))
+    .map((season) => sweets.find((sweet) => sweet.id === season))
+    .filter((sweet): sweet is Sweet => sweet !== undefined)
+  const [featured, ...others] = ordered
 
   return (
     <section
@@ -105,10 +126,12 @@ export function Collection() {
         />
         <p className={styles.lede}>{collectionLede}</p>
 
+        <TodayKoyomi today={now} />
+
         {featured && (
           <article className={styles.featured}>
             <SweetPhoto sweet={featured} sizes={sizesFeatured} />
-            <SweetBody sweet={featured} />
+            <SweetBody sweet={featured} isCurrent />
           </article>
         )}
 

@@ -12,8 +12,6 @@ export type Sweet = {
   /** 商品写真の代替テキスト */
   artAlt: string
   price: string
-  /** いま提供中の菓子か */
-  current?: boolean
 }
 
 export const sweets: Sweet[] = [
@@ -38,7 +36,6 @@ export const sweets: Sweet[] = [
       '葛の透きとおる生地に白餡の月を沈めて。冷やしてお召し上がりいただくと、夜の水面をすくったような涼が立ちます。',
     artAlt: '透きとおる葛のなかに白餡の月が沈む上生菓子',
     price: '540円(税込)',
-    current: true,
   },
   {
     id: 'autumn',
@@ -67,5 +64,5 @@ export const sweets: Sweet[] = [
 export const collectionLede =
   '店先に並ぶのは、その節気の菓子ひとそろいだけ。春夏秋冬から、それぞれの代表銘をご紹介します。'
 
-/** いま提供中の菓子に添える札 */
+/** いまの季節の菓子に添える札。どの菓子に付くかは、今日の暦(features/koyomi)で決まる */
 export const currentLabel = 'いまの季節'
