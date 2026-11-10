@@ -9,8 +9,11 @@ import { Menu } from './components/sections/Menu'
 import { Craft } from './components/sections/Craft'
 import { Shop } from './components/sections/Shop'
 import { Reservation } from './components/sections/Reservation'
+import { useInitialHashScroll } from './hooks/useInitialHashScroll'
 
 function App() {
+  useInitialHashScroll()
+
   return (
     <>
       <SkipLink />
