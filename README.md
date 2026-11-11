@@ -45,7 +45,7 @@ React + TypeScript + Vite による1ページ構成のレスポンシブサイ�
 | ビルド | Vite 8 |
 | スタイル | CSS Modules + CSS Custom Properties(デザイントークン) |
 | フォント | @fontsource(セルフホスト・unicode-rangeスライス配信) |
-| テスト | Vitest + Testing Library(68件) |
+| テスト | Vitest + Testing Library(70件) |
 | lint | oxlint |
 
 アニメーションライブラリ・CSSフレームワークは使用していません(依存は最小限)。動きはすべて素の CSS(opacity / translate / scale)で実装しています。
